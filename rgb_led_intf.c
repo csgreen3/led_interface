@@ -26,27 +26,30 @@ rgb_led_s leds[MAX_NUM_RGB_LEDS];
 static uint8_t rgb_led_set
 (
  uint8_t led_id,
- uint8_t red_pulse,
- uint8_t green_pulse,
- uint8_t blue_pulse
+ uint8_t red_val,
+ uint8_t green_val,
+ uint8_t blue_val
 )
 {
   rgb_led_s* led = &leds[led_id];
 
-  led->red_info.config.Pulse = red_pulse;
   pwm_intf_write(&led->red_info.tim_handle,
       &led->red_info.config,
       led->red_info.tim_handle.Channel);
 
-  led->green_info.config.Pulse = green_pulse;
   pwm_intf_write(&led->green_info.tim_handle,
       &led->green_info.config,
       led->green_info.tim_handle.Channel);
 
-  led->blue_info.config.Pulse = blue_pulse;
   pwm_intf_write(&led->blue_info.tim_handle,
       &led->blue_info.config,
       led->blue_info.tim_handle.Channel);
+
+  // TODO Scale ADC values
+  adc_intf_write(led->red_info.pin, red_val);
+  adc_intf_write(led->green_info.pin, green_val);
+  adc_intf_write(led->blue_info.pin, blue_val);
+
   return 0;
 }
 
@@ -159,6 +162,9 @@ uint8_t rgb_led_intf_new_init
       &led->red_info.config,
       red_channel);
 
+  adc_intf_write(led->red_info.pin, 0);
+  adc_intf_write(led->green_info.pin, 0);
+  adc_intf_write(led->blue_info.pin, 0);
   return ret_val;
 }
 

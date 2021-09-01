@@ -5,12 +5,12 @@
 
 const GPIO GPIO_TABLE[] = {
     /* Application PWM*/
-    /* RGB_LED 1*/
+    /* RGB_LED 1 ADC */
     FILL_GPIO("LED_1_RED",    GPIOA,  0, OUTPUT, LOW_SPEED, NONE, true, BRAKE)
     FILL_GPIO("LED_1_GREEN",    GPIOB,  10, OUTPUT, LOW_SPEED, NONE, true, PROP)
     FILL_GPIO("LED_1_BLUE",    GPIOB,  11, OUTPUT, LOW_SPEED, NONE, true, BRAKE) 
 
-    /* RGB_LED_2*/
+    /* RGB_LED_2  ADC */
     FILL_GPIO("LED_1_RED",    GPIOA,  0, OUTPUT, LOW_SPEED, NONE, true, BRAKE)
     FILL_GPIO("LED_1_GREEN",    GPIOB,  10, OUTPUT, LOW_SPEED, NONE, true, PROP)
     FILL_GPIO("LED_1_BLUE",    GPIOB,  11, OUTPUT, LOW_SPEED, NONE, true, BRAKE) 
