@@ -47,22 +47,21 @@ static uint8_t rgb_led_set
   pwm_intf_write(&led->blue_info.tim_handle,
       &led->blue_info.config,
       led->blue_info.tim_handle.Channel);
+  return 0;
 }
 
 
 /******************************************************************************
 
-  Function: rgb_led_set
+  Function: rgb_led_fill_pwm
 
 ******************************************************************************/
 /**
   
-  @brief set led with specific pulse for red green and blue pins
+  @brief fill handlers for pwm
   @param 
-    led_id,
-    red_pulse,
-    green_pulse,
-    blue_pulse
+    *tim_handle,
+    *config
 
   @return
     uint8_t - 0 success
@@ -77,21 +76,18 @@ static uint8_t rgb_led_fill_pwm
 {
   /* populate TIM_HandleTypeDef */
   /* populate TIM_OC_InitTypeDef */
+  return 0;
 }
 
 /******************************************************************************
 
-  Function: rgb_led_set
+  Function: init_rgb_leds
 
 ******************************************************************************/
 /**
   
-  @brief set led with specific pulse for red green and blue pins
-  @param 
-    led_id,
-    red_pulse,
-    green_pulse,
-    blue_pulse
+  @brief initialize array of leds  
+  @param  - none
 
   @return
     uint8_t - 0 success
@@ -101,21 +97,22 @@ static uint8_t rgb_led_fill_pwm
 uint8_t init_rgb_leds()
 {
   memset(leds, 0, sizeof(rgb_led_s)*MAX_NUM_RGB_LEDS);
+  return 0;
 }
 
 /******************************************************************************
 
-  Function: rgb_led_set
+  Function: rgb_led_intf_new_init
 
 ******************************************************************************/
 /**
   
-  @brief set led with specific pulse for red green and blue pins
+  @brief Initialize with passed in channel 
   @param 
     led_id,
-    red_pulse,
-    green_pulse,
-    blue_pulse
+    red_channel,
+    green_channel,
+    blue_channel
 
   @return
     uint8_t - 0 success
@@ -130,7 +127,7 @@ uint8_t rgb_led_intf_new_init
  HAL_TIM_ActiveChannel blue_channel,
 )
 {
-  uint8_t ret_val = 1;
+  uint8_t ret_val = 0; 
   assert(led_id < MAX_NUM_RGB_LEDS);
 
   rgb_led_s *led = &leds[led_id];
@@ -161,11 +158,13 @@ uint8_t rgb_led_intf_new_init
       &led->red_info.tim_handle,
       &led->red_info.config,
       red_channel);
+
+  return ret_val;
 }
 
 /******************************************************************************
 
-  Function: rgb_led_set
+  Function: rgb_led_intf_init
 
 ******************************************************************************/
 /**
@@ -197,11 +196,13 @@ uint8_t rgb_led_intf_init
       red_channel,
       green_channel,
       blue_channel);
+
+  return ret_val;
 }
 
 /******************************************************************************
 
-  Function: rgb_led_set_state
+  Function: rgb_led_intf_set_state
 
 ******************************************************************************/
 /**

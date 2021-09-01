@@ -1,5 +1,5 @@
-#ifndef LED_INTF_H
-#define LED_INTF_H
+#ifndef RGB_LED_INTF_H
+#define RGB_LED_INTF_H
 
 #include <main.h>
 
@@ -30,8 +30,42 @@ typedef struct
   rgb_led_pin_info_s   blue_info;
 }rgb_led_s;
 
+/******************************************************************************
+
+  Function: init_rgb_leds
+
+******************************************************************************/
+/**
+  
+  @brief initialize array of leds  
+  @param  - none
+
+  @return
+    uint8_t - 0 success
+              1 failed 
+     
+*/
 uint8_t init_rgb_leds();
 
+/******************************************************************************
+
+  Function: rgb_led_intf_new_init
+
+******************************************************************************/
+/**
+  
+  @brief Initialize with passed in channel 
+  @param 
+    led_id,
+    red_channel,
+    green_channel,
+    blue_channel
+
+  @return
+    uint8_t - 0 success
+              1 failed 
+     
+*/
 uint8_t rgb_led_intf_new_init
 (
  uint8_t     led_id,
@@ -41,17 +75,67 @@ uint8_t rgb_led_intf_new_init
  uint8_t     channel 
 );
 
+/******************************************************************************
+
+  Function: rgb_led_intf_init
+
+******************************************************************************/
+/**
+  
+  @brief init the specific led based on id passed in 
+  @param 
+    led_id,
+
+  @return
+    uint8_t - 0 success
+              1 failed 
+     
+*/
 uint8_t rgb_led_intf_init
 (
  uint8_t     led_id
 );
 
+/******************************************************************************
+
+  Function: rgb_led_intf_set_state
+
+******************************************************************************/
+/**
+  
+  @brief set led with specific pulse for red green and blue pins
+  @param 
+    led_id,
+    state
+
+  @return
+    uint8_t - 0 success
+              1 failed 
+     
+*/
 uint8_t rgb_led_intf_set_state
 (
  uint8_t         led_id,
  rgb_led_state_e state
 );
 
+/******************************************************************************
+
+  Function: rgb_led_intf_set_brightness
+
+******************************************************************************/
+/**
+  
+  @brief set led with specific brightness
+  @param 
+    led_id,
+    brightness
+
+  @return
+    uint8_t - 0 success
+              1 failed 
+     
+*/
 uint8_t rgb_led_intf_set_brightness
 (
  uint8_t     led_id,
